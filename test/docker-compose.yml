@@ -1,0 +1,13 @@
+services:
+  dify:
+    restart: always
+    image: whatwewant/dify:${SERVICE_DIFY_IMAGE_VERSION}
+    environment:
+      PORT: $SERVICE_DIFY_PORT
+      USERNAME: ${SERVICE_DIFY_USERNAME}
+      PASSWORD: ${SERVICE_DIFY_PASSWORD}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress

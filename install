@@ -1,0 +1,13 @@
+#!/bin/bash
+
+which zmicro >>/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  curl -o- https://raw.githubusercontent.com/zcorky/zmicro/master/install | bash
+fi
+
+if [ "$TESTING" = "true" ]; then
+  zmicro service test dify
+  exit 0
+fi
+
+zmicro service start dify

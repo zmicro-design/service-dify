@@ -1,0 +1,46 @@
+backend:
+  service:
+    protocol: http
+    name: web
+    port: 3000
+
+routes:
+  - name: console
+    path: /console/api
+    backend:
+      service:
+        name: api
+        port: 5001
+        request:
+          path:
+            disable_prefix_rewrite: true
+
+  - name: api
+    path: /api
+    backend:
+      service:
+        name: api
+        port: 5001
+        request:
+          path:
+            disable_prefix_rewrite: true
+
+  - name: files
+    path: /files
+    backend:
+      service:
+        name: api
+        port: 5001
+        request:
+          path:
+            disable_prefix_rewrite: true
+
+  - name: web
+    path: /
+    backend:
+      service:
+        name: web
+        port: 3000
+        request:
+          path:
+            disable_prefix_rewrite: true

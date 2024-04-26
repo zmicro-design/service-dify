@@ -12,7 +12,7 @@ services:
 
   # API service
   api:
-    image: langgenius/dify-api:0.6.5
+    image: whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     # ports:
     #   - "5001:5001"
@@ -22,7 +22,7 @@ services:
       # The log level for the application. Supported values are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
       LOG_LEVEL: INFO
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
-      SECRET_KEY: ${SECRET_KEY}
+      SECRET_KEY: ${SERVICE_DIFY_SECRET_KEY}
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
       # example: http://cloud.dify.ai
@@ -165,7 +165,7 @@ services:
 # worker service
   # The Celery worker for processing the queue.
   worker:
-    image: langgenius/dify-api:0.6.5
+    image: whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     environment:
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
@@ -253,7 +253,7 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:0.6.5
+    image: whatwewant/dify-web:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     # ports:
     #   - "3000:3000"
@@ -271,7 +271,7 @@ services:
 
   # The postgres database.
   db:
-    image: postgres:15-alpine
+    image: whatwewant/postgres:v16-1
     restart: always
     environment:
       PGUSER: postgres
@@ -294,7 +294,7 @@ services:
 
   # The redis cache.
   redis:
-    image: redis:6-alpine
+    image: whatwewant/redis:v6-1
     restart: always
     volumes:
       # Mount the redis data directory to the container.
@@ -333,7 +333,7 @@ services:
 
   # The DifySandbox
   sandbox:
-    image: langgenius/dify-sandbox:latest
+    image: whatwewant/dify-sandbox:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     cap_add:
     # Why is sys_admin permission needed?

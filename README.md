@@ -4,117 +4,78 @@
 
 ### Installation
 
-- Step 1: Run script
-  
-```bash
-curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install -o /tmp/install.sh && bash /tmp/install.sh && rm /tmp/install.sh
-```
-
-- Step 2: Input your login password
-
-```
-✖ [2024-05-09 22:24:53][service] service(dify) not found
-ℹ [2024-05-09 22:24:53][service] try to install service(dify) ...
-ℹ [2024-05-09 22:24:53] start to install service dify ...
-ℹ [2024-05-09 22:24:55] succeed to install service dify.
-#####################################################
-# 更多用法
-# 1. 查看日志
-$ zmicro service logs dify -f --tail 100
-# 2. 修改配置
-$ zmicro service edit config dify
-# 3. 重启服务
-$ zmicro service restart dify
-# 4. 升级服务
-$ zmicro service upgrade dify
-# 5. 关闭服务
-$ zmicro service stop dify
-#####################################################
-
-Password:
-```
-
-- Step 3: Input or confirm `Port` and `Secret Key` for dify
-
-```
-? Port 8080
-? Secret Key (default: 5ee73679-b00c-4ec1-8e53-accc12c6cf40)
-[+] Running 70/8
- ✔ sandbox 12 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                           81.1s
- ✔ db 8 layers [⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                     13.9s
- ✔ dify 5 layers [⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                      19.0s
- ✔ weaviate 4 layers [⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                   16.8s
- ✔ worker Pulled                                                                                                                                                     67.3s
- ✔ api 12 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                               67.3s
- ✔ redis 6 layers [⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                    78.8s
- ✔ web 15 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                            61.4s
-[+] Running 8/8
- ✔ Container dify-sandbox-1   Started                                                                                                                                 1.2s
- ✔ Container dify-db-1        Started                                                                                                                                 1.2s
- ✔ Container dify-weaviate-1  Started                                                                                                                                 1.2s
- ✔ Container dify-web-1       Started                                                                                                                                 1.2s
- ✔ Container dify-redis-1     Started                                                                                                                                 1.2s
- ✔ Container dify-worker-1    Started                                                                                                                                 0.0s
- ✔ Container dify-api-1       Started                                                                                                                                 0.0s
- ✔ Container dify-dify-1      Started
-```
-
-- Step 4: Open New Terminal, see logs for dify with running `zmicro service logs dify -f --tail 100`
+1. **Prerequisites:** Ensure you have Docker installed and running on your system.
+2. **Installation Script:** Run the following command to download and execute the installation script:
 
 ```bash
-zmicro service logs dify -f --tail 100
+curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install -sSL | bash -s -- dify
 ```
 
-- Step 5: Visit Browser: `http://127.0.0.1:8080`
+   - **Explanation:**
+     - `curl`: downloads the installation script from GitHub.
+     - `https://raw.githubusercontent.com/zmicro-design/service-dify/master/install`: URL of the installation script.
+     - `-sSL`: downloads the script silently with SSL verification.
+     - `bash -s -- dify`: executes the downloaded script with `dify` argument (likely for service identification).
 
-## More Usage
+3. **Login Password:** During installation, you'll be prompted to enter your login password. This password is likely used for authenticating with a container registry or managing docker services.
 
-### 1. Start Dify
+4. **Configuration (Optional):** After installation, the script might prompt you to confirm or modify configurations like port and secret key for the `dify` service.
 
-```bash
-zmicro service start dify
-```
+**Note:** Consider mentioning any specific docker daemon configuration required (e.g., setting up a Docker registry login).
 
-### 2. Stop Dify
+### More Usage
 
-```bash
-zmicro service stop dify
-```
+Here are some commands for managing the `dify` service:
 
-### 3. See logs
-
-```bash
-zmicro service logs dify -f --tail 100
-```
-
-### 4. Update Config
-
-```bash
-zmicro service edit config dify
-```
-
-### 5. Restart Dify
-
-```bash
-zmicro service restart dify
-```
-
-### 6. Upgrade Dify
-
-```bash
-zmicro service upgrade dify
-```
+* **Start:**
+  ```bash
+  zmicro service start dify
+  ```
+* **Stop:**
+  ```bash
+  zmicro service stop dify
+  ```
+* **View Logs:**
+  ```bash
+  zmicro service logs dify -f --tail 100
+  ```
+    - `-f`: follows the log output in real-time.
+    - `--tail 100`: shows the last 100 log lines.
+* **Edit Configuration:**
+  ```bash
+  zmicro service edit config dify
+  ```
+* **Restart:**
+  ```bash
+  zmicro service restart dify
+  ```
+* **Upgrade:**
+  ```bash
+  zmicro service upgrade dify
+  ```
 
 ## FAQ
 
-- 1. Question: network error like `curl: (7) Failed to connect to raw.githubusercontent.com port 443 after 15 ms: Couldn't connect to server`
-  - Answer: apply your proxy in your terminal before install
-    - if you proxy service run in port `7890`, like `clash`
-      - 1. run command: `export HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890`
-      - 2. run install command again
+**1. Network Error During Installation**
 
-- 2. Question: show `Password:`
-  - Answer: input your login password. docker should use your password.
+If you encounter a network error like `curl: Failed to connect...`, you might need to configure your terminal to use a proxy service (e.g., `clash`). Here's how:
+
+1. Run the following command to set your proxy environment variables (replace `7890` with your actual proxy port):
+
+   ```bash
+   export HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890
+   ```
+
+2. Re-run the installation command after setting the proxy.
+
+**2. Password Prompt**
+
+The `Password:` prompt during installation likely requests your login credentials for a container registry or docker service management tool. Enter your valid password to proceed.
+
+**3. failed to read config file: read /etc/api-gateway/config.yaml: is a directory**
+
+Add directory permissions for your `Docker Desktop`, directory is `/opt`
 
 ## License
+
 * MIT

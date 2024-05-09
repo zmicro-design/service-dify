@@ -7,7 +7,7 @@
 
 ### 安装
 
-1. **先决条件：** 确保您的系统已安装并运行 Docker。
+1. **先决条件：** 确保你的系统已安装并运行 Docker。
 2. **安装脚本：** 运行以下命令下载并执行安装脚本：
 
 ```bash
@@ -20,9 +20,9 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
      - `-sSL`：静默下载脚本并进行 SSL 验证。
      - `bash -s -- dify`：使用 `dify` 参数（可能是用于服务标识）执行下载的脚本。
 
-3. **登录密码：**安装过程中，系统会提示您输入登录密码。此密码可能用于容器注册表身份验证或管理 Docker 服务。
+3. **登录密码：**安装过程中，系统会提示你输入登录密码。此密码可能用于容器注册表身份验证或管理 Docker 服务。
 
-4. **配置（可选）：**安装完成后，脚本可能会提示您确认或修改 `dify` 服务的配置，例如端口和密钥。
+4. **配置（可选）：**安装完成后，脚本可能会提示你确认或修改 `dify` 服务的配置，例如端口和密钥。
 
 **注意:** 考虑提及任何所需的特定 Docker 守护进程配置（例如，设置 Docker 注册表登录）。
 
@@ -61,9 +61,9 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
 
 **1. 安装过程中出现网络错误**
 
-如果您遇到类似 `curl: Failed to connect...` 的网络错误，则可能需要配置终端使用代理服务（例如，`clash`）。 以下是如何操作：
+如果你遇到类似 `curl: Failed to connect...` 的网络错误，则可能需要配置终端使用代理服务（例如，`clash`）。 以下是如何操作：
 
-1. 运行以下命令设置代理环境变量（将 `7890` 替换为您实际的代理端口）：
+1. 运行以下命令设置代理环境变量（将 `7890` 替换为你实际的代理端口）：
 
    ```bash
    export HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890
@@ -73,11 +73,11 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
 
 **2. 密码提示**
 
-安装过程中的 `Password:` 提示符可能要求您输入容器注册表或 Docker 服务管理工具的登录凭据。 输入您的有效密码以继续。
+安装过程中的 `Password:` 提示符可能要求你输入容器注册表或 Docker 服务管理工具的登录凭据。 输入你的有效密码以继续。
 
 **3. 读取配置文件失败：读取 /etc/api-gateway/config.yaml: 是一个目录**
 
-为您的 Docker Desktop 添加目录权限，目录是 `/opt`
+为你的 Docker Desktop 添加目录权限，目录是 `/opt`
 
 ## 四、许可
 

@@ -29,7 +29,7 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
 
 **Note:** Consider mentioning any specific docker daemon configuration required (e.g., setting up a Docker registry login).
 
-### More Usage
+## Usage
 
 Here are some commands for managing the `dify` service:
 

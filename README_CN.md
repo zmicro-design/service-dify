@@ -3,7 +3,7 @@
 [![CI](https://github.com/zmicro-design/service-dify/actions/workflows/ci.yml/badge.svg)](https://github.com/zmicro-design/service-dify/actions/workflows/ci.yml)
 [![GitHub issues](https://img.shields.io/github/issues/zmicro-design/service-dify.svg)](https://github.com/zmicro-design/service-dify/issues)
 
-## 开始使用
+## 一、开始使用
 
 ### 安装
 
@@ -26,7 +26,7 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
 
 **注意:** 考虑提及任何所需的特定 Docker 守护进程配置（例如，设置 Docker 注册表登录）。
 
-### 常用操作
+## 二、常用操作
 
 以下是用于管理 `dify` 服务的一些命令：
 
@@ -57,11 +57,11 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
   zmicro service upgrade dify
   ```
 
-## 常见问题
+## 三、常见问题
 
 **1. 安装过程中出现网络错误**
 
-如果您遇到类似 `curl: 连接失败...` 的网络错误，则可能需要配置终端使用代理服务（例如，`clash`）。 以下是如何操作：
+如果您遇到类似 `curl: Failed to connect...` 的网络错误，则可能需要配置终端使用代理服务（例如，`clash`）。 以下是如何操作：
 
 1. 运行以下命令设置代理环境变量（将 `7890` 替换为您实际的代理端口）：
 
@@ -79,6 +79,6 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
 
 为您的 Docker Desktop 添加目录权限，目录是 `/opt`
 
-## 许可
+## 四、许可
 
 * MIT

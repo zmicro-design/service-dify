@@ -7,8 +7,8 @@
 
 ### 安装
 
-1. **先决条件：**确保您的系统已安装并运行 Docker。
-2. **安装脚本：**运行以下命令下载并执行安装脚本：
+1. **先决条件：** 确保您的系统已安装并运行 Docker。
+2. **安装脚本：** 运行以下命令下载并执行安装脚本：
 
 ```bash
 curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install -sSL | bash -s -- dify

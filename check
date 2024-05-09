@@ -10,6 +10,9 @@ check() {
     cat $SERVICE_CONFIG
   fi
 
+  # fix docker in mac permissions
+  cp $SERVICE_DIR/conf/gateway.yaml $SERVICE_CONFIGS/gateway.yaml
+
   service::config_set SERVICE_DIFY_PORT text "Port" 8080
 
   service::config_set SERVICE_DIFY_SECRET_KEY text "Secret Key" $(os::uuid)

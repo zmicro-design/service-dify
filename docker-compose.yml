@@ -5,7 +5,8 @@ services:
     ports:
       - ${SERVICE_DIFY_PORT}:8080
     volumes:
-      - ${SERVICE_DIR}/conf/gateway.yaml:/etc/api-gateway/config.yaml
+      # - ${SERVICE_DIR}/conf/gateway.yaml:/etc/api-gateway/config.yaml
+      - $SERVICE_CONFIGS/gateway.yaml:/etc/api-gateway/config.yaml
     depends_on:
       - api
       - web

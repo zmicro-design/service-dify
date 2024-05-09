@@ -1,5 +1,11 @@
 # Dify - Zmicro Service
 
+[![Build Status](https://github.com/zmicro-design/service-dify/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/zmicro-design/service-dify/actions/workflows/ci.yml)
+[![GitHub issues](https://img.shields.io/github/issues/zmicro-design/service-dify.svg)](https://github.com/zmicro-design/service-dify/issues)
+
+[中文文档](./README_CN.md)
+
+
 ## Getting Started
 
 ### Installation

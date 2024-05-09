@@ -39,12 +39,30 @@ Password:
 ```
 ? Port 8080
 ? Secret Key (default: 5ee73679-b00c-4ec1-8e53-accc12c6cf40)
+[+] Running 70/8
+ ✔ sandbox 12 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                           81.1s
+ ✔ db 8 layers [⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                     13.9s
+ ✔ dify 5 layers [⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                      19.0s
+ ✔ weaviate 4 layers [⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                   16.8s
+ ✔ worker Pulled                                                                                                                                                     67.3s
+ ✔ api 12 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                               67.3s
+ ✔ redis 6 layers [⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                    78.8s
+ ✔ web 15 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                            61.4s
+[+] Running 8/8
+ ✔ Container dify-sandbox-1   Started                                                                                                                                 1.2s
+ ✔ Container dify-db-1        Started                                                                                                                                 1.2s
+ ✔ Container dify-weaviate-1  Started                                                                                                                                 1.2s
+ ✔ Container dify-web-1       Started                                                                                                                                 1.2s
+ ✔ Container dify-redis-1     Started                                                                                                                                 1.2s
+ ✔ Container dify-worker-1    Started                                                                                                                                 0.0s
+ ✔ Container dify-api-1       Started                                                                                                                                 0.0s
+ ✔ Container dify-dify-1      Started
 ```
 
 - Step 4: Open New Terminal, see logs for dify with running `zmicro service logs dify -f --tail 100`
 
 ```bash
-
+zmicro service logs dify -f --tail 100
 ```
 
 - Step 5: Visit Browser: `http://127.0.0.1:8080`
@@ -94,6 +112,9 @@ zmicro service upgrade dify
     - if you proxy service run in port `7890`, like `clash`
       - 1. run command: `export HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890`
       - 2. run install command again
+
+- 2. Question: show `Password:`
+  - Answer: input your login password. docker should use your password.
 
 ## License
 * MIT

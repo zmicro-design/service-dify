@@ -57,7 +57,7 @@ curl https://raw.githubusercontent.com/zmicro-design/service-dify/master/install
   zmicro service upgrade dify
   ```
 
-## 常见问题解答
+## 常见问题
 
 **1. 安装过程中出现网络错误**
 

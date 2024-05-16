@@ -1,7 +1,7 @@
 backend:
   service:
     protocol: http
-    name: web
+    name: dify-web
     port: 3000
 
 routes:
@@ -9,7 +9,7 @@ routes:
     path: /console/api
     backend:
       service:
-        name: api
+        name: dify-api
         port: 5001
         request:
           path:
@@ -19,7 +19,7 @@ routes:
     path: /api
     backend:
       service:
-        name: api
+        name: dify-api
         port: 5001
         request:
           path:
@@ -29,7 +29,7 @@ routes:
     path: /files
     backend:
       service:
-        name: api
+        name: dify-api
         port: 5001
         request:
           path:
@@ -39,7 +39,7 @@ routes:
     path: /
     backend:
       service:
-        name: web
+        name: dify-web
         port: 3000
         request:
           path:

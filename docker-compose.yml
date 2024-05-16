@@ -7,11 +7,11 @@ services:
     volumes:
       - ${SERVICE_DIR}/conf/gateway.yaml:/etc/api-gateway/config.yaml
     depends_on:
-      - api
-      - web
+      - dify-api
+      - dify-web
 
   # API service
-  api:
+  dify-api:
     image: whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     # ports:
@@ -52,12 +52,12 @@ services:
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
       DB_PASSWORD: difyai123456
-      DB_HOST: db
+      DB_HOST: dify-db
       DB_PORT: 5432
       DB_DATABASE: dify
       # The configurations of redis connection.
       # It is consistent with the configuration in the 'redis' service below.
-      REDIS_HOST: redis
+      REDIS_HOST: dify-redis
       REDIS_PORT: 6379
       REDIS_USERNAME: ''
       REDIS_PASSWORD: difyai123456
@@ -66,7 +66,7 @@ services:
       REDIS_DB: 0
       # The configurations of celery broker.
       # Use redis as the broker, and redis db 1 for celery broker.
-      CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
+      CELERY_BROKER_URL: redis://:difyai123456@dify-redis:6379/1
       # Specifies the allowed origins for cross-origin requests to the Web API, e.g. https://dify.app or * for all origins.
       WEB_API_CORS_ALLOW_ORIGINS: '*'
       # Specifies the allowed origins for cross-origin requests to the console API, e.g. https://cloud.dify.ai or * for all origins.
@@ -101,7 +101,7 @@ services:
       # The type of vector store to use. Supported values are `weaviate`, `qdrant`, `milvus`, `relyt`.
       VECTOR_STORE: weaviate
       # The Weaviate endpoint URL. Only available when VECTOR_STORE is `weaviate`.
-      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_ENDPOINT: http://dify-weaviate:8080
       # The Weaviate API key.
       WEAVIATE_API_KEY: WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih
       # The Qdrant endpoint URL. Only available when VECTOR_STORE is `qdrant`.
@@ -122,7 +122,7 @@ services:
       # The milvus tls switch.
       MILVUS_SECURE: 'false'
       # relyt configurations
-      RELYT_HOST: db
+      RELYT_HOST: dify-db
       RELYT_PORT: 5432
       RELYT_USER: postgres
       RELYT_PASSWORD: difyai123456
@@ -146,7 +146,7 @@ services:
       # The sample rate for Sentry profiles. Default: `1.0`
       SENTRY_PROFILES_SAMPLE_RATE: 1.0
       # The sandbox service endpoint.
-      CODE_EXECUTION_ENDPOINT: "http://sandbox:8194"
+      CODE_EXECUTION_ENDPOINT: "http://dify-sandbox:8194"
       CODE_EXECUTION_API_KEY: dify-sandbox
       CODE_MAX_NUMBER: 9223372036854775807
       CODE_MIN_NUMBER: -9223372036854775808
@@ -156,15 +156,15 @@ services:
       CODE_MAX_OBJECT_ARRAY_LENGTH: 30
       CODE_MAX_NUMBER_ARRAY_LENGTH: 1000
     depends_on:
-      - db
-      - redis
+      - dify-db
+      - dify-redis
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ${SERVICE_DATA}/volumes/app/storage:/app/api/storage
 
 # worker service
   # The Celery worker for processing the queue.
-  worker:
+  dify-worker:
     image: whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     environment:
@@ -182,18 +182,18 @@ services:
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
       DB_PASSWORD: difyai123456
-      DB_HOST: db
+      DB_HOST: dify-db
       DB_PORT: 5432
       DB_DATABASE: dify
       # The configurations of redis cache connection.
-      REDIS_HOST: redis
+      REDIS_HOST: dify-redis
       REDIS_PORT: 6379
       REDIS_USERNAME: ''
       REDIS_PASSWORD: difyai123456
       REDIS_DB: 0
       REDIS_USE_SSL: 'false'
       # The configurations of celery broker.
-      CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
+      CELERY_BROKER_URL: redis://:difyai123456@dify-redis:6379/1
       # The type of storage to use for storing user files. Supported values are `local` and `s3` and `azure-blob`, Default: `local`
       STORAGE_TYPE: local
       STORAGE_LOCAL_PATH: storage
@@ -211,7 +211,7 @@ services:
       # The type of vector store to use. Supported values are `weaviate`, `qdrant`, `milvus`, `relyt`.
       VECTOR_STORE: weaviate
       # The Weaviate endpoint URL. Only available when VECTOR_STORE is `weaviate`.
-      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_ENDPOINT: http://dify-weaviate:8080
       # The Weaviate API key.
       WEAVIATE_API_KEY: WVF5YThaHlkYwhGUSmCRgsX3tD5ngdN8pkih
       # The Qdrant endpoint URL. Only available when VECTOR_STORE is `qdrant`.
@@ -239,20 +239,20 @@ services:
       RESEND_API_KEY: ''
       RESEND_API_URL: https://api.resend.com
       # relyt configurations
-      RELYT_HOST: db
+      RELYT_HOST: dify-db
       RELYT_PORT: 5432
       RELYT_USER: postgres
       RELYT_PASSWORD: difyai123456
       RELYT_DATABASE: postgres
     depends_on:
-      - db
-      - redis
+      - dify-db
+      - dify-redis
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ${SERVICE_DATA}/volumes/app/storage:/app/api/storage
 
   # Frontend web application.
-  web:
+  dify-web:
     image: whatwewant/dify-web:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     # ports:
@@ -270,7 +270,7 @@ services:
       SENTRY_DSN: ''
 
   # The postgres database.
-  db:
+  dify-db:
     image: whatwewant/postgres:v16-1
     restart: always
     environment:
@@ -293,7 +293,7 @@ services:
       retries: 30
 
   # The redis cache.
-  redis:
+  dify-redis:
     image: whatwewant/redis:v6-1
     restart: always
     volumes:
@@ -308,7 +308,7 @@ services:
     #   - "6379:6379"
 
   # The Weaviate vector store.
-  weaviate:
+  dify-weaviate:
     image: semitechnologies/weaviate:1.19.0
     restart: always
     volumes:
@@ -332,7 +332,7 @@ services:
     #  - "8080:8080"
 
   # The DifySandbox
-  sandbox:
+  dify-sandbox:
     image: whatwewant/dify-sandbox:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     cap_add:

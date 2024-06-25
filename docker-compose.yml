@@ -1,7 +1,7 @@
 services:
   dify:
     restart: always
-    image: whatwewant/api-gateway:v1
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/api-gateway:v1
     ports:
       - ${SERVICE_DIFY_PORT}:8080
     volumes:
@@ -13,7 +13,7 @@ services:
 
   # API service
   dify-api:
-    image: whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     # ports:
     #   - "5001:5001"
@@ -166,7 +166,7 @@ services:
 # worker service
   # The Celery worker for processing the queue.
   dify-worker:
-    image: whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/dify-api:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     environment:
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
@@ -254,7 +254,7 @@ services:
 
   # Frontend web application.
   dify-web:
-    image: whatwewant/dify-web:${SERVICE_DIFY_IMAGE_VERSION}
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/dify-web:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     # ports:
     #   - "3000:3000"
@@ -272,7 +272,7 @@ services:
 
   # The postgres database.
   dify-db:
-    image: whatwewant/postgres:v16-1
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/postgres:v16-1
     restart: always
     environment:
       PGUSER: postgres
@@ -295,7 +295,7 @@ services:
 
   # The redis cache.
   dify-redis:
-    image: whatwewant/redis:v6-1
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/redis:v6-1
     restart: always
     volumes:
       # Mount the redis data directory to the container.
@@ -310,7 +310,7 @@ services:
 
   # The Weaviate vector store.
   dify-weaviate:
-    image: semitechnologies/weaviate:1.19.0
+    image: ${SERVICE_IMAGE_REGISTRY}/semitechnologies/weaviate:1.25.5
     restart: always
     volumes:
       # Mount the Weaviate data directory to the container.
@@ -334,7 +334,7 @@ services:
 
   # The DifySandbox
   dify-sandbox:
-    image: whatwewant/dify-sandbox:${SERVICE_DIFY_IMAGE_VERSION}
+    image: ${SERVICE_IMAGE_REGISTRY}/whatwewant/dify-sandbox:${SERVICE_DIFY_IMAGE_VERSION}
     restart: always
     cap_add:
     # Why is sys_admin permission needed?

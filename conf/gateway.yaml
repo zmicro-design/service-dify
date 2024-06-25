@@ -25,6 +25,16 @@ routes:
           path:
             disable_prefix_rewrite: true
 
+  - name: openai-api
+    path: /v1
+    backend:
+      service:
+        name: dify-api
+        port: 5001
+        request:
+          path:
+            disable_prefix_rewrite: true
+
   - name: files
     path: /files
     backend:
